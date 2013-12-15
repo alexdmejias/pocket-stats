@@ -10,3 +10,5 @@ application/logs/*
 
 application/config/database.php
 application/config/pocket.php
+
+application/config/production/
