@@ -12,5 +12,3 @@ application/config/database.php
 application/config/pocket.php
 
 application/config/production/
-
-public_html/node_modules
