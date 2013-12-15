@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
-	<link rel="stylesheet" href="<?php echo site_url('/public_html/styles.css'); ?>">
+	<link rel="stylesheet" href="<?php echo site_url('/library/css/styles.css'); ?>">
 
 </head>
 <body>
