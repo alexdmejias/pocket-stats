@@ -2,6 +2,8 @@
 
 class Pocket extends CI_Controller {
 
+	// load and setup an array with all the necessary/global
+	// parameters
 	public function _config() {
 		// load special config file
 		$this->load->helper('url');
@@ -12,7 +14,7 @@ class Pocket extends CI_Controller {
 			'authorize_url' => 'https://getpocket.com/v3/oauth/authorize',
 			'consumer_key' => $this->config->item('consumer_key'),
 			'access_token' => $this->config->item('access_token'),
-			'redirect_uri' => 'http://pocket.dev/index.php/pocket/callback'
+			'redirect_uri' => $this->config->item('redirect_uri')
 		);
 
 		return $config;
@@ -22,7 +24,7 @@ class Pocket extends CI_Controller {
 
 		$config = $this->_config();
 
-		$config['request_url'] = 'https://getpocket.com/v3/oauth/request';
+		// $config['request_url'] = 'https://getpocket.com/v3/oauth/request';
 
 		$data = array(
 			'consumer_key' => $config['consumer_key'],
@@ -41,7 +43,7 @@ class Pocket extends CI_Controller {
 		);
 
 		$context  = stream_context_create($opts);
-		$result = file_get_contents($request_url, false, $context);
+		$result = file_get_contents($config['request_url'], false, $context);
 
 		$code = explode('=', $result);
 		$request_token = $code[1];
@@ -56,12 +58,12 @@ class Pocket extends CI_Controller {
 		$consumer_key = $config['consumer_key'];
 		$request_token = $_GET['request_token'];
 
-		$config = array(
+		$data_config = array(
 			'consumer_key' => $config['consumer_key'],
 			'code' => $request_token
 		);
 
-		$post_data = http_build_query($config);
+		$post_data = http_build_query($data_config);
 
 		$opts = array(
 			'http' => array(
@@ -72,10 +74,20 @@ class Pocket extends CI_Controller {
 				'content' => $post_data
 			)
 		);
+		var_dump($config);
 		$context = stream_context_create($opts);
-		$result = file_get_contents($config['url'], false, $context);
+		$result = file_get_contents($config['authorize_url'], false, $context);
 
-		echo $result;
+        $access_token = explode('&',$result);
+        if($access_token[0]!=''){
+                echo "<h1>You've been authenticated succesfully!</h1>";
+                echo "You should write down the access_token and then add it to config.php<br>";
+                echo "Your access token: ". $access_token[0];
+                echo "<br>";
+                echo "add this to config.php";
+        } else{
+                echo "Something went wrong. :( ";
+        }
 	}
 
 	public function _get_articles($article_count = 10) {
