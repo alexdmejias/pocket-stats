@@ -138,7 +138,10 @@ class Pocket extends CI_Controller {
 		$list_count = count((array)$list);
 		$data['list'] = $list;
 		$data['count'] = $list_count;
+
+		$this->load->view('_header');
 		$this->load->view('list', $data);
+		$this->load->view('_footer');
 	}
 
 	public function full() {
@@ -146,7 +149,10 @@ class Pocket extends CI_Controller {
 
 		$data['list'] = $list;
 		$data['count'] = count((array)$list);
+
+		$this->load->view('_header');
 		$this->load->view('list', $data);
+		$this->load->view('_footer');
 	}
 
 	public function insert() {
@@ -155,13 +161,20 @@ class Pocket extends CI_Controller {
 		$this->Count->insert_entry($count);
 
 		$data['msg'] = "inserted $count";
+
+		$this->load->view('_header');
 		$this->load->view('basic', $data);
+		$this->load->view('_footer');
 	}
 
 	public function index() {
+		$config = $this->_config();
 		$data['list'] = $this->_get_articles(10);
 		$data['msg'] = "this will be the index page";
+		$data['wasd'] = $config;
+		$this->load->view('_header');
 		$this->load->view('basic', $data);
+		$this->load->view('_footer');
 	}
 
 }
