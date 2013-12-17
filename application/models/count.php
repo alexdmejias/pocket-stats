@@ -10,6 +10,7 @@ class Count extends CI_Model {
 
 	function get_last_ten_entries() {
 		$query = $this->db->get('counts', 10);
+		return $query->result();
 	}
 
 	function insert_entry($count) {
