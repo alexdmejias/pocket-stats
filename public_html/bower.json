@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "d3": "~3.3.13",
-    "angularjs": "*"
+    "angular": "~1.2.5",
+    "d3": "~3.3.13"
   }
 }
