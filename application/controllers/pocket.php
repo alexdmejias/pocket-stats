@@ -6,7 +6,6 @@ class Pocket extends CI_Controller {
 	// parameters
 	public function _config() {
 		// load special config file
-		$this->load->helper('url');
 		$this->config->load('pocket.php');
 
 		$config = array(
@@ -23,8 +22,6 @@ class Pocket extends CI_Controller {
 	public function connect() {
 
 		$config = $this->_config();
-
-		// $config['request_url'] = 'https://getpocket.com/v3/oauth/request';
 
 		$data = array(
 			'consumer_key' => $config['consumer_key'],
@@ -74,7 +71,6 @@ class Pocket extends CI_Controller {
 				'content' => $post_data
 			)
 		);
-		var_dump($config);
 		$context = stream_context_create($opts);
 		$result = file_get_contents($config['authorize_url'], false, $context);
 
@@ -133,6 +129,13 @@ class Pocket extends CI_Controller {
 		return count((array)$list);
 	}
 
+	// get database entries
+	public function counts($q = 10) {
+		$this->load->model('Count');
+		echo json_encode($this->Count->get_counts($q));
+	}
+
+	// get articles from the pocket reading list
 	public function articles($article_count = 10) {
 		$list = $this->_get_articles($article_count);
 		$list_count = count((array)$list);
@@ -160,18 +163,14 @@ class Pocket extends CI_Controller {
 		$this->load->model('Count');
 		$this->Count->insert_entry($count);
 
-		$data['msg'] = "inserted $count";
+		/*$data['msg'] = "inserted $count";
 
 		$this->load->view('_header');
 		$this->load->view('basic', $data);
-		$this->load->view('_footer');
+		$this->load->view('_footer');*/
 	}
 
 	public function index() {
-		$config = $this->_config();
-		$data['list'] = $this->_get_articles(10);
-		$data['msg'] = "this will be the index page";
-		$data['wasd'] = $config;
 		$this->load->view('_header');
 		$this->load->view('basic', $data);
 		$this->load->view('_footer');
