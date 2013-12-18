@@ -162,17 +162,11 @@ class Pocket extends CI_Controller {
 		$count = $this->_get_total_count();
 		$this->load->model('Count');
 		$this->Count->insert_entry($count);
-
-		/*$data['msg'] = "inserted $count";
-
-		$this->load->view('_header');
-		$this->load->view('basic', $data);
-		$this->load->view('_footer');*/
 	}
 
 	public function index() {
 		$this->load->view('_header');
-		$this->load->view('basic', $data);
+		$this->load->view('basic');
 		$this->load->view('_footer');
 	}
 
