@@ -8,14 +8,18 @@ class Count extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_last_ten_entries() {
-		$query = $this->db->get('counts', 10);
+	function get_counts($q = 10) {
+		$query = $this->db->get('counts', $q);
 		return $query->result();
+	}
+
+	function get_last_ten_counts() {
+		return $this->get_counts(10);
 	}
 
 	function insert_entry($count) {
 		$this->count = $count;
-		$this->date =  date('U');
+		$this->date =  date("Y-m-d H:i:s");
 
 		$this->db->insert('counts', $this);
 
