@@ -129,12 +129,6 @@ class Pocket extends CI_Controller {
 		return count((array)$list);
 	}
 
-	// get database entries
-	public function counts($q = 10) {
-		$this->load->model('Count');
-		echo json_encode($this->Count->get_counts($q));
-	}
-
 	// get articles from the pocket reading list
 	public function articles($article_count = 10) {
 		$list = $this->_get_articles($article_count);
@@ -158,16 +152,8 @@ class Pocket extends CI_Controller {
 		$this->load->view('_footer');
 	}
 
-	public function insert() {
-		$count = $this->_get_total_count();
-		$this->load->model('Count');
-		$this->Count->insert_entry($count);
-	}
-
 	public function index() {
-		$this->load->view('_header');
-		$this->load->view('basic');
-		$this->load->view('_footer');
+		$this->load->view('home');
 	}
 
 }

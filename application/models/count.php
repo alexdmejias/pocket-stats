@@ -13,8 +13,8 @@ class Count extends CI_Model {
 		return $query->result();
 	}
 
-	function get_last_ten_counts() {
-		return $this->get_counts(10);
+	function remove_entry($id) {
+		$this->db->delete('counts', array('id' => $id));
 	}
 
 	function insert_entry($count) {
