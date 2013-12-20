@@ -16,7 +16,7 @@ class Counts extends CI_Controller {
 
 	public function getLatest($q=1) {
 		$this->load->model('Count');
-		echo json_encode($this->Count->get_latest($q));
+		echo json_encode($this->Count->get_counts($q, true));
 	}
 
 	// will attempt to insert a record into the database
@@ -28,7 +28,7 @@ class Counts extends CI_Controller {
 		$current_count = file_get_contents(base_url('/pocket/getTotalCount/1'));
 
 		// var_dump($current_count);
-		$latest_count = $this->Count->get_latest();
+		$latest_count = $this->Count->get_counts(10, true);
 		$latest_count = $latest_count[0]->count;
 
 		$date = date('i');
