@@ -8,8 +8,12 @@ class Count extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_counts($q = 10, $offset = 0) {
-		$query = $this->db->get('counts', $q, $offset);
+	function get_counts($q = 10, $latest = false) {
+		if($latest == true) {
+			$this->db->order_by('id', 'desc');
+		}
+
+		$query = $this->db->get('counts', $q);
 		return $query->result();
 	}
 
@@ -35,11 +39,4 @@ class Count extends CI_Model {
 			WHERE rownum %'.$e.' =1 ');
 		return $query->result();
 	}
-
-	function get_latest($q = 1) {
-		$this->db->order_by('id', 'desc');
-		$query = $this->get_counts($q);
-		return $query;
-	}
-
 }

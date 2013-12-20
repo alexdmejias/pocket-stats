@@ -3,15 +3,20 @@
 class Counts extends CI_Controller {
 
 	// get q number of records
-	public function getcounts($q = 10, $offset = 0) {
+	public function getcounts($q = 10, $latest = false) {
 		$this->load->model('Count');
-		echo json_encode($this->Count->get_counts($q, $offset));
+		echo json_encode($this->Count->get_counts($q, $latest));
 	}
 
 	// get every N entry from the db
 	public function getEvery($e = 12) {
 		$this->load->model('Count');
 		echo json_encode($this->Count->get_every($e));
+	}
+
+	public function getLatest($q=1) {
+		$this->load->model('Count');
+		echo json_encode($this->Count->get_latest($q));
 	}
 
 	// will attempt to insert a record into the database
