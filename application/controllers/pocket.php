@@ -86,6 +86,7 @@ class Pocket extends CI_Controller {
         }
 	}
 
+	// get N number of articles from pocket
 	public function _get_articles($article_count = 10) {
 		$config = $this->_config();
 
@@ -123,10 +124,17 @@ class Pocket extends CI_Controller {
 
 	}
 
-	public function _get_total_count() {
+	// return a count of all the articles in pocket
+	public function getTotalCount($print = false) {
 		$list = $this->_get_articles(10000);
 
-		return count((array)$list);
+		$count = count((array)$list);
+
+		if($print == true) {
+			echo $count;
+		} else {
+			return $count;
+		}
 	}
 
 	// get articles from the pocket reading list
@@ -141,6 +149,8 @@ class Pocket extends CI_Controller {
 		$this->load->view('_footer');
 	}
 
+	// get all the pocket articles
+	// unless you have more than 10000 articles
 	public function full() {
 		$list = $this->_get_articles(10000);
 
