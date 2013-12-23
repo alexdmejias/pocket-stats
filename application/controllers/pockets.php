@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Pocket extends CI_Controller {
+class Pockets extends CI_Controller {
 
 	// load and setup an array with all the necessary/global
 	// parameters
@@ -137,8 +137,17 @@ class Pocket extends CI_Controller {
 		}
 	}
 
+
+	public function update() {
+		$this->load->model('Pocket');
+
+		$totalCount = $this->getTotalCount();
+
+		$this->Pocket->update($totalCount);
+	}
+
 	// get articles from the pocket reading list
-	public function articles($article_count = 10) {
+/*	public function articles($article_count = 10) {
 		$list = $this->_get_articles($article_count);
 		$list_count = count((array)$list);
 		$data['list'] = $list;
@@ -147,11 +156,11 @@ class Pocket extends CI_Controller {
 		$this->load->view('_header');
 		$this->load->view('list', $data);
 		$this->load->view('_footer');
-	}
+	}*/
 
 	// get all the pocket articles
 	// unless you have more than 10000 articles
-	public function full() {
+/*	public function full() {
 		$list = $this->_get_articles(10000);
 
 		$data['list'] = $list;
@@ -160,7 +169,7 @@ class Pocket extends CI_Controller {
 		$this->load->view('_header');
 		$this->load->view('list', $data);
 		$this->load->view('_footer');
-	}
+	}*/
 
 	public function index() {
 		$this->load->view('home');

@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "pocket";
+$route['default_controller'] = "pockets";
 $route['404_override'] = '';
 
 
