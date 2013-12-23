@@ -8,8 +8,8 @@ class Count extends CI_Model {
 		parent::__construct();
 	}
 
-	function get_counts($q = 10, $latest = false) {
-		if($latest == true) {
+	function get_counts($q = 10, $latest = 'latest') {
+		if($latest == 'latest') {
 			$this->db->order_by('id', 'desc');
 		}
 
@@ -28,15 +28,4 @@ class Count extends CI_Model {
 		$this->db->insert('counts', $this);
 	}
 
-	function get_every($e) {
-		$query = $this->db->query('SELECT *
-			FROM (
-				SELECT
-					@row := @row +1 AS rownum, count, date
-				FROM (
-					SELECT @row :=0) r, counts
-				) ranked
-			WHERE rownum %'.$e.' =1 ');
-		return $query->result();
-	}
 }
