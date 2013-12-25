@@ -1,5 +1,5 @@
 {
-  "name": "pocket-stats",
+  "name": "pocket-analytics",
   "version": "0.0.0",
   "homepage": "https://github.com/amejias101/pocket-stats",
   "authors": [
@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.5",
-    "d3": "~3.3.13"
+    "chartjs": "*",
+    "jquery": "~2.0.3"
   }
 }
