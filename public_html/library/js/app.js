@@ -1,5 +1,5 @@
 (function($) {
-	$.get('/counts/getcounts/30/1', function(data) {
+	$.get('/counts/getcounts/30/latest', function(data) {
 		dataLoaded(data);
 	}, 'json');
 
@@ -20,10 +20,18 @@
 
     function genChartOptions(labels, points) {
     	chartOptions = {
-			// labels : ["January","February","March","April","May","June","July"],
 			labels : labels,
 			datasets : [
 				{
+					// scaleOverride : true,
+
+					//** Required if scaleOverride is true **
+					//Number - The number of steps in a hard coded scale
+					// scaleSteps : 1,
+					//Number - The value jump in the hard coded scale
+					// scaleStepWidth : 1,
+					//Number - The scale starting value
+					// scaleStartValue : 0,
 					fillColor : "rgba(220,220,220,0.5)",
 					strokeColor : "rgba(220,220,220,1)",
 					pointColor : "rgba(220,220,220,1)",
@@ -38,8 +46,6 @@
 		jsonData = data;
 
 		extractData(jsonData.reverse());
-		// chartOptions(chartLabels, chartData);
-		// chartOptions();
 		genChartOptions(chartLabels, chartData);
 		makeChart('chart', chartOptions);
 	}
