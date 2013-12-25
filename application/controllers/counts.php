@@ -34,6 +34,8 @@ class Counts extends CI_Controller {
 
 
 		$date = date('i');
+		echo $date;
+		echo '<br>';
 
 		if(($date == 00) || ($pocket_total != $latest_count)){
 			$this->Count->insert_entry($pocket_total);
